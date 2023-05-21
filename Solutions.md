@@ -121,3 +121,27 @@ int main() {
     }
     return 0;
 }
+
+8- Toggle String
+
+#include <stdio.h>
+#include <string.h>
+int toggle(char S[]){
+	int length = strlen(S);
+	for(int i = 0 ; i<=length; i++){
+		if(isupper(S[i])){
+			S[i] = tolower(S[i]);
+		}
+		else if(islower(S[i])){
+			S[i] = toupper(S[i]);
+		}
+	}
+}
+int main(){
+	char S[100];
+	scanf("%[^\n]", S);
+	toggle(S);
+	printf("%s \n", S );
+	return 0;
+}
+
