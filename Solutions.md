@@ -94,7 +94,6 @@ int main() {
         product = (product * arr[i]) % MOD;
     }
     printf("%lld\n", product);
-
     return 0;
 }
 
