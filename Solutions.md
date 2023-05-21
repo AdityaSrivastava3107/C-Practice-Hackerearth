@@ -145,3 +145,23 @@ int main(){
 	return 0;
 }
 
+9- Divisibility
+#include <stdio.h>
+int main(){
+	int n;
+	scanf("%d\n", &n);
+	int a[n];
+	int last;
+	int count=0;
+	for(int i = 0; i<n; i++){
+		scanf("%d\n", &a[i]);
+	}
+	for(int j = 0; j<n; j++){
+		last = a[j]%10;	
+		if(last%10==0) count++;	
+	}
+	if(count==n) printf("Yes\n");
+	else printf("No\n");
+	return 0;
+}
+
