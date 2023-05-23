@@ -253,4 +253,126 @@ int main() {
     return 0;
 }
 
+13- Number of Steps
+#include <stdio.h>
+#include <limits.h>
+
+// Function to calculate the minimum number of steps
+int minimum_steps(int A[], int B[], int N) {
+    // Check if all elements of A are already equal
+    int i, all_equal = 1;
+    for (i = 1; i < N; i++) {
+        if (A[i] != A[i-1]) {
+            all_equal = 0;
+            break;
+        }
+    }
+    if (all_equal) {
+        return 0;
+    }
+    // Find the minimum and maximum values in B
+    int min_b = INT_MAX;
+    int max_b = INT_MIN;
+    for (i = 0; i < N; i++) {
+        if (B[i] < min_b) {
+            min_b = B[i];
+        }
+        if (B[i] > max_b) {
+            max_b = B[i];
+        }
+    }
+    // Initialize the minimum steps to a large value
+    int min_steps = INT_MAX;
+    // Calculate the number of steps for each possible value of A
+    for (i = min_b; i <= max_b; i++) {
+        int steps = 0;
+        int j;
+        for (j = 0; j < N; j++) {
+            if (A[j] != i) {
+                // Check if it is possible to set A[j] to i
+                if ((A[j] > i && B[j] > 0) || (A[j] < i && B[j] < 0)) {
+                    steps += abs(A[j] - i) / abs(B[j]);
+                    if (abs(A[j] - i) % abs(B[j]) != 0) {
+                        steps = -1;  // Not possible to make all elements equal
+                        break;
+                    }
+                } else {
+                    steps = -1;  // Not possible to make all elements equal
+                    break;
+                }
+            }
+        }
+        if (steps != -1 && steps < min_steps) {
+            min_steps = steps;
+        }
+    }
+    return (min_steps == INT_MAX) ? -1 : min_steps;
+}
+
+int main() {
+    int N;
+    scanf("%d", &N);
+    int A[N], B[N];
+    int i;
+    for (i = 0; i < N; i++) {
+        scanf("%d", &A[i]);
+    }
+    for (i = 0; i < N; i++) {
+        scanf("%d", &B[i]);
+    }
+    int result = minimum_steps(A, B, N);
+    printf("%d\n", result);
+    return 0;
+}
+
+14- Cost of Balloons
+#include<stdio.h>
+int main()
+{
+	int t,gr,pr,n,S1,S2,i;
+	scanf("%d",&t);
+	while(t--)
+	{	S1=S2=0;
+		scanf("%d %d %d",&gr,&pr,&n);
+		int a1[n], a2[n],t1,t2;
+		for(i=0;i<n;i++)
+		{
+			scanf("%d",&a1[i]);
+			scanf("%d",&a2[i]);
+			S1+=a1[i];
+			S2+=a2[i];
+		}
+	t1=(S1*gr)+(S2*pr);
+	t2=(S2*gr)+(S1*pr);
+	//F=(t1<t2?t1:t2);
+	// wrong in 2 cases : F=(S1<S2?S1:S1)*(gr>pr?gr:pr)+(S1>S2?S1:S2)*(gr<pr?gr:pr);
+	printf("%d\n",t1<t2?t1:t2);
+	}
+	return 0;
+}
+
+15- Seven segement display
+#include <stdio.h>
+
+int main(){
+int stick[10] = {6, 2, 5, 5, 4, 5, 6, 3, 7, 6};
+int num; // number of test cases
+scanf("%d", &num); // input of test cases
+for (int i = 0; i < num; i++)
+{
+char str[1000] = {'\0'}, ans[1000] = {'\0'};
+int j = 0, k = 0;
+long long total_stick = 0;
+scanf("%s", &str);
+while (str[j] != '\0')
+j++, total_stick += stick[str[j - 1] - '0'];
+if ((total_stick % 2) == 1)
+ans[k] = '7', k++, total_stick -= 3;
+while (total_stick > 0)
+ans[k] = '1', k++, total_stick -= 2;
+printf("%s\n", ans);
+
+}
+
+}
 
